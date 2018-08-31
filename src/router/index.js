@@ -7,6 +7,8 @@ import Msite from '../pages/Msite/Msite.vue'
 import Order from '../pages/Order/Order.vue'
 import Profile from '../pages/Profile/Profile.vue'
 import Search from '../pages/Search/Search.vue'
+import Login from '../pages/Login/Login.vue'
+
 
 
 //声明使用插件
@@ -17,23 +19,39 @@ export default new VueRouter({
   routes:[
     {
       path:'/msite',
-      component:Msite
+      component:Msite,
+      meta:{
+        showFooter:true
+      }
     },
     {
       path:'/search',
-      component:Search
+      component:Search,
+      meta:{
+        showFooter:true
+      }
     },
     {
       path:'/order',
-      component:Order
+      component:Order,
+      meta:{
+        showFooter:true
+      }
     },
     {
       path:'/profile',
-      component:Profile
+      component:Profile,
+      meta:{
+        showFooter:true
+      }
     },
     {
       path:'/',
       redirect:'/msite'
-    }
+    },
+    {
+      path:'/login',
+      component:Login
+    },
   ]
 })
