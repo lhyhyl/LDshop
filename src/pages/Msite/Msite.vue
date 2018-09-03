@@ -198,6 +198,9 @@
       margin-top 10px
       background #fff
       .shop_header
+        .icon-xuanxiang
+          float: left
+          margin-right 3px
         padding 10px 10px 0
         .shop_icon
           margin-left 5px
@@ -205,6 +208,8 @@
         .shop_header_title
           color #999
           font-size 14px
-          line-height 20px
+          line-height 17px
+          float: left
+
 
 </style>
