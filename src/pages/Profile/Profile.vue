@@ -2,18 +2,18 @@
   <section class="profile">
     <HeaderTop title="我的"></HeaderTop>
     <section class="profile-number">
-      <router-link to="/login" class="profile-link">
+      <router-link :to=" userInfo._id ? '/userinfo' :'/login'" class="profile-link">
 
           <div class="profile_image">
             <i class="iconfont icon-person"></i>
           </div>
           <div class="user-info">
-            <p class="user-info-top">登录/注册</p>
+            <p class="user-info-top" v-if="!userInfo.phone">{{userInfo.name || '登录||注册'}}</p>
             <p>
                 <span class="user-icon">
                   <i class="iconfont icon-shouji icon-mobile"></i>
                 </span>
-              <span class="icon-mobile-number">暂无绑定手机号</span>
+              <span class="icon-mobile-number">{{userInfo.phone || '暂无绑定手机号' }}</span>
             </p>
           </div>
           <span class="arrow">
@@ -64,13 +64,13 @@
               </span>
         </div>
       </a>
-      <!-- 硅谷外卖会员卡 -->
+      <!-- 铃铛外卖会员卡 -->
       <a href="javascript:" class="my_order">
             <span>
               <i class="iconfont icon-vip"></i>
             </span>
         <div class="my_order_div">
-          <span>硅谷外卖会员卡</span>
+          <span>铃铛外卖会员卡</span>
           <span class="my_order_icon">
                 <i class="iconfont icon-jiantou1"></i>
               </span>
@@ -91,12 +91,36 @@
         </div>
       </a>
     </section>
-  </section>
+    <section class="profile_my_order border-1px">
+      <mt-button type="danger" style="width: 100%" v-if="userInfo._id" @click="logout">退出登录</mt-button>
+    </section>
+    </section>
 </template>
 <script>
+  import {mapState} from 'vuex'
   import HeaderTop from '../../components/HeaderTop/HeaderTop.vue'
+  import MtButton from "../../../node_modules/mint-ui/packages/button/src/button.vue";
+  import { MessageBox,Toast } from 'mint-ui'
   export default {
+    methods:{
+      logout(){
+        MessageBox.confirm('确定退出吗?').then(
+          action => {
+            this.$store.dispatch('logout')
+            Toast('退出成功')
+          },
+          action => {
+            console.log('放弃退出登录')
+          }
+
+        );
+      }
+    },
+    computed:{
+      ...mapState(['userInfo'])
+    },
     components:{
+      MtButton,
       HeaderTop
     }
   }
@@ -109,7 +133,7 @@
     width 100%
     overflow hidden
     .header
-      background-color #02a774
+      background-color #008DE1
       position fixed
       z-index 100
       left 0
@@ -153,7 +177,7 @@
         clearFix()
         position relative
         display block
-        background #02a774
+        background #008DE1
         padding 20px 10px
         .profile_image
           float left
@@ -234,7 +258,7 @@
           border 0
           .info_data_top
             span
-              color #6ac20b
+              color #008DE1
     .profile_my_order
       top-border-1px(#e4e4e4)
       margin-top 10px
@@ -252,13 +276,13 @@
             margin-left -10px
             font-size 30px
           .icon-order-s
-            color #02a774
+            color #008DE1
           .icon-jifen
             color #ff5f3e
           .icon-vip
             color #f90
           .icon-fuwu
-            color #02a774
+            color #008DE1
         .my_order_div
           width 100%
           border-bottom 1px solid #f1f1f1

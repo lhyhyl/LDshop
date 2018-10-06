@@ -8,16 +8,18 @@
   </header>
 </template>
 <script>
+
     export default {
       props:{
         title:String
-      }
+      },
+
     }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
   .header
-    background-color #02a774
+    background-color #008DE1
     position fixed
     z-index 100
     left 0

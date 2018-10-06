@@ -7,9 +7,15 @@
 <script>
   import FooterGuide from './components/FooterGuide/FooterGuide.vue'
     export default {
-    components:{
-      FooterGuide
-    }
+      components:{
+         FooterGuide
+       },
+      mounted(){
+        this.$store.dispatch('getAddress'),
+        this.$store.dispatch('getUserInfo')
+        this.$store.dispatch('getShopInfo')
+
+      }
     }
 </script>
 
